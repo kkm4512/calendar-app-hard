@@ -10,11 +10,13 @@ import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.TodoDto.RequestTodoDto;
 import org.terror.calendarapphard.model.TodoDto.ResponseTodoDto;
 import org.terror.calendarapphard.repository.TodoRepository;
+import org.terror.calendarapphard.util.UtilFind;
 
 @Service
 @RequiredArgsConstructor
 public class TodoService {
     private final TodoRepository todoRepository;
+    private final UtilFind utilFind;
 
     @Transactional
     public BaseResponseDto createTodo(RequestTodoDto reqTodo) {
@@ -25,13 +27,13 @@ public class TodoService {
 
     @Transactional(readOnly = true)
     public ResponseTodoDto getTodo(Long id) {
-        Todo todo = customTodoFIndById(id);
+        Todo todo = utilFind.todoFindById(id);
         return new ResponseTodoDto(todo);
     }
 
     @Transactional
     public BaseResponseDto updateTodo(Long id, RequestTodoDto reqDto) {
-        Todo todo = customTodoFIndById(id);
+        Todo todo = utilFind.todoFindById(id);
         //트랜잭션 환경내에 있는 더티체킹으로인하여 업데이트됨
         todo.setTitle(reqDto.getTitle());
         todo.setAuthor(reqDto.getAuthor());
@@ -39,7 +41,4 @@ public class TodoService {
         return new BaseResponseDto(BaseResponseEnum.TODO_UPDATE_SUCCESS);
     }
 
-    private Todo customTodoFIndById(Long id){
-        return todoRepository.findById(id).orElseThrow(() -> new HandleUserNotFoundException(BaseResponseEnum.USER_NOT_FOUND));
-    }
 }
