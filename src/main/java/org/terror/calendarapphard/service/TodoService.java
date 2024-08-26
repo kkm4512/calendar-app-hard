@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terror.calendarapphard.entity.Todo;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
-import org.terror.calendarapphard.exceptions.HandleUserNotFoundException;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.TodoDto.RequestTodoDto;
 import org.terror.calendarapphard.model.TodoDto.ResponseTodoDto;
