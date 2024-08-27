@@ -1,6 +1,7 @@
 package org.terror.calendarapphard.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terror.calendarapphard.entity.Calendar;
@@ -8,9 +9,11 @@ import org.terror.calendarapphard.entity.Member;
 import org.terror.calendarapphard.entity.Todo;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
 import org.terror.calendarapphard.model.BaseResponseDto;
+import org.terror.calendarapphard.model.JwtDto;
 import org.terror.calendarapphard.model.memberDto.RequestMemberDto;
 import org.terror.calendarapphard.model.memberDto.ResponseMemberDto;
 import org.terror.calendarapphard.repository.MemberRepository;
+import org.terror.calendarapphard.util.JwtManager;
 import org.terror.calendarapphard.util.UtilFind;
 
 import java.util.List;
@@ -20,12 +23,17 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final UtilFind utilFind;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtManager jm;
 
     @Transactional
-    public BaseResponseDto createMember(RequestMemberDto reqDto) {
+    public String createMember(RequestMemberDto reqDto) {
         Member member = new Member(reqDto);
+        String hashedPassword = passwordEncoder.encode(reqDto.getPassword());
+        member.setPassword(hashedPassword);
+        String jwt = jm.createJwt(new JwtDto(member));
         memberRepository.save(member);
-        return new BaseResponseDto(BaseResponseEnum.MEMBER_SAVE_SUCCESS);
+        return jwt;
     }
 
     @Transactional(readOnly = true)

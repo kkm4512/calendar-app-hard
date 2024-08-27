@@ -17,7 +17,7 @@ public class MemberController {
 
     // 유저 저장
     @PostMapping
-    public BaseResponseDto createMember(@RequestBody RequestMemberDto reqDto){
+    public String createMember(@RequestBody RequestMemberDto reqDto){
         return memberService.createMember(reqDto);
     }
 

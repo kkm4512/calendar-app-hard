@@ -8,4 +8,5 @@ import lombok.Getter;
 public class RequestMemberDto {
     private String author;
     private String email;
+    private String password;
 }

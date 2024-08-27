@@ -21,10 +21,12 @@ public class Member extends TimeStamp {
     private Long id;
     private String author;
     private String email;
+    private String password;
 
     //Dto -> Entity
     public Member(RequestMemberDto reqDto) {
         this.author = reqDto.getAuthor();
         this.email = reqDto.getEmail();
+        this.password = reqDto.getPassword();
     }
 }
