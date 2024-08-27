@@ -1,4 +1,4 @@
-package org.terror.calendarapphard.model.CommentDto;
+package org.terror.calendarapphard.model.commentDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

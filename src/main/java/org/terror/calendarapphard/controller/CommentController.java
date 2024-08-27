@@ -3,8 +3,8 @@ package org.terror.calendarapphard.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.terror.calendarapphard.model.BaseResponseDto;
-import org.terror.calendarapphard.model.CommentDto.RequestCommentDto;
-import org.terror.calendarapphard.model.CommentDto.ResponseCommentDto;
+import org.terror.calendarapphard.model.commentDto.RequestCommentDto;
+import org.terror.calendarapphard.model.commentDto.ResponseCommentDto;
 import org.terror.calendarapphard.service.CommentService;
 
 import java.util.List;

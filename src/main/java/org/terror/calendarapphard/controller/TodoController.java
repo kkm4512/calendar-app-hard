@@ -3,8 +3,8 @@ package org.terror.calendarapphard.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.terror.calendarapphard.model.BaseResponseDto;
-import org.terror.calendarapphard.model.TodoDto.RequestTodoDto;
-import org.terror.calendarapphard.model.TodoDto.ResponseTodoDto;
+import org.terror.calendarapphard.model.todoDto.RequestTodoDto;
+import org.terror.calendarapphard.model.todoDto.ResponseTodoDto;
 import org.terror.calendarapphard.service.TodoService;
 
 @RestController

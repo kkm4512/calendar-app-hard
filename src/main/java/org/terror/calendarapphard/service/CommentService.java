@@ -7,8 +7,8 @@ import org.terror.calendarapphard.entity.Comment;
 import org.terror.calendarapphard.entity.Todo;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
 import org.terror.calendarapphard.model.BaseResponseDto;
-import org.terror.calendarapphard.model.CommentDto.RequestCommentDto;
-import org.terror.calendarapphard.model.CommentDto.ResponseCommentDto;
+import org.terror.calendarapphard.model.commentDto.RequestCommentDto;
+import org.terror.calendarapphard.model.commentDto.ResponseCommentDto;
 import org.terror.calendarapphard.repository.CommentRepository;
 import org.terror.calendarapphard.util.UtilFind;
 

@@ -1,4 +1,4 @@
-package org.terror.calendarapphard.model.TodoDto;
+package org.terror.calendarapphard.model.todoDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package org.terror.calendarapphard.model.CommentDto;
+package org.terror.calendarapphard.model.commentDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.terror.calendarapphard.entity.Comment;
 import org.terror.calendarapphard.model.TimeStampDto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor

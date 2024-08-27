@@ -1,15 +1,15 @@
-# ?? Database ??
+# DB config
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/todohardapp?serverTimezone=Asia/Seoul
     username: root
     password: root
-# update? ???? ?????
+# 변경될때마다 update
   jpa:
     hibernate:
       ddl-auto: update
-# ??????? sql ?? ??
+# sql 확인
     properties:
       hibernate:
         show_sql: true

@@ -24,10 +24,12 @@ repositories {
 }
 
 dependencies {
+    //web
     implementation 'org.springframework.boot:spring-boot-starter-web'
     //lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    //default
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     //Jpa
@@ -38,6 +40,8 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
     //MySQL
     runtimeOnly 'com.mysql:mysql-connector-j'
+    // json
+    implementation 'org.json:json:20230227'
 }
 
 tasks.named('test') {

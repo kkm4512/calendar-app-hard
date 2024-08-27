@@ -1,4 +1,4 @@
-package org.terror.calendarapphard.model.TodoDto;
+package org.terror.calendarapphard.model.pageNavigateDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,19 +11,18 @@ import org.terror.calendarapphard.model.TimeStampDto;
 @AllArgsConstructor
 @Setter
 @Getter
-public class ResponseTodoDto extends TimeStampDto {
-    private Long id;
+public class ResponsePageNavigateDto extends TimeStampDto {
     private String title;
     private String author;
     private String detail;
+    private int commentCount;
 
-    // Entity -> Dto
-    public ResponseTodoDto(Todo todo) {
-        this.id = todo.getId();
+    public ResponsePageNavigateDto(Todo todo) {
         this.title = todo.getTitle();
         this.author = todo.getAuthor();
         this.detail = todo.getDetail();
         this.setCreatedAt(todo.getCreatedAt());
         this.setUpdatedAt(todo.getUpdatedAt());
+        this.commentCount = todo.getCommnetList().size();
     }
 }
