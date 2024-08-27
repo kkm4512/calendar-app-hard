@@ -30,8 +30,8 @@ public class CommentService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseCommentDto getComment(Long todoId, Long id) {
-        Comment comment = utilFind.commentFindById(todoId,id);
+    public ResponseCommentDto getComment(Long id) {
+        Comment comment = utilFind.commentFindById(id);
         return new ResponseCommentDto(comment);
     }
 
@@ -44,16 +44,15 @@ public class CommentService {
     }
 
     @Transactional
-    public BaseResponseDto updateComment(Long todoId, Long id, RequestCommentDto reqDto) {
-        Comment comment = utilFind.commentFindById(todoId,id);
+    public BaseResponseDto updateComment(Long id, RequestCommentDto reqDto) {
+        Comment comment = utilFind.commentFindById(id);
         comment.setDetail(reqDto.getDetail());
-        comment.setAuthor(reqDto.getAuthor());
         return new BaseResponseDto(BaseResponseEnum.COMMENT_UPDATE_SUCCESS);
     }
 
     @Transactional
-    public BaseResponseDto deleteComment(Long todoId, Long id) {
-        Comment comment = utilFind.commentFindById(todoId, id);
+    public BaseResponseDto deleteComment(Long id) {
+        Comment comment = utilFind.commentFindById(id);
         commentRepository.delete(comment);
         return new BaseResponseDto(BaseResponseEnum.COMMENT_DELETE_SUCCESS);
     }

@@ -21,7 +21,6 @@ public class Todo extends TimeStamp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String author;
     private String detail;
 
     // 댓글 갯수 알려면 양방향 해야함
@@ -29,10 +28,19 @@ public class Todo extends TimeStamp {
     @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
     private final List<Comment> commnetList = new ArrayList<>();
 
+    // 일정은 이제 작성 유저명 대신 유저 고유 식별자 필드를 가짐
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    // Todo 가 삭제되면 캘린더도 삭제되게 하기위해 설정
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
+    private List<Calendar> calendarList = new ArrayList<>();
+
+
     // Dto -> Entity
     public Todo(RequestTodoDto reqTodo) {
         this.title = reqTodo.getTitle();
-        this.author = reqTodo.getAuthor();
         this.detail = reqTodo.getDetail();
     }
 }

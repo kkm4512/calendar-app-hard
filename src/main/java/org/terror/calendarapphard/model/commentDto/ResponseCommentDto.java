@@ -7,9 +7,6 @@ import lombok.Setter;
 import org.terror.calendarapphard.entity.Comment;
 import org.terror.calendarapphard.model.TimeStampDto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -22,7 +19,7 @@ public class ResponseCommentDto extends TimeStampDto {
     //Entity -> Dto
     public ResponseCommentDto(Comment comment) {
         this.id = comment.getId();
-        this.author = comment.getAuthor();
+        this.author = comment.getTodo().getMember().getAuthor();
         this.detail = comment.getDetail();
         this.setCreatedAt(comment.getCreatedAt());
         this.setUpdatedAt(comment.getUpdatedAt());

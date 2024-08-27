@@ -27,7 +27,7 @@ public class ResponseTodoDto extends TimeStampDto {
     public ResponseTodoDto(Todo todo) {
         this.id = todo.getId();
         this.title = todo.getTitle();
-        this.author = todo.getAuthor();
+        this.author = todo.getMember().getAuthor();
         this.detail = todo.getDetail();
         this.setCreatedAt(todo.getCreatedAt());
         this.setUpdatedAt(todo.getUpdatedAt());

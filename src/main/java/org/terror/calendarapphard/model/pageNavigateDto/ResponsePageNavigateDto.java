@@ -21,8 +21,8 @@ public class ResponsePageNavigateDto extends TimeStampDto {
     public ResponsePageNavigateDto(Todo todo) {
         this.id = todo.getId();
         this.title = todo.getTitle();
-        this.author = todo.getAuthor();
         this.detail = todo.getDetail();
+        this.author = todo.getMember().getAuthor();
         this.setCreatedAt(todo.getCreatedAt());
         this.setUpdatedAt(todo.getUpdatedAt());
         this.commentCount = todo.getCommnetList().size();
