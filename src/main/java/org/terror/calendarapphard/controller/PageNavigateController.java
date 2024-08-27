@@ -12,6 +12,7 @@ import org.terror.calendarapphard.service.PageNavigateService;
 public class PageNavigateController {
     private final PageNavigateService pageNavigateService;
 
+    // 페이지 조회
     @GetMapping("/query")
     public Page<ResponsePageNavigateDto> getPage(@RequestParam int page, @RequestParam(defaultValue = "10") int size) {
         return pageNavigateService.getPage(page - 1,size);
