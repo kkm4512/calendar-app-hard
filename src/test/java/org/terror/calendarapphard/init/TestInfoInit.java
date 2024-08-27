@@ -27,13 +27,13 @@ public class TestInfoInit {
     @Rollback(value = false)
     void 테스트_데이터_넣기() {
         for (int x = 0; x < 5; x++) {
-            RequestMemberDto reqMemberDto = new RequestMemberDto("author" + x, "test@naver.com"+ x);
+            RequestMemberDto reqMemberDto = new RequestMemberDto("author" + x, "test@naver.com"+ x,"!@skdud340");
             memberService.createMember(reqMemberDto);
             for (int i = 0; i < 6; i++) {
                 RequestTodoDto reqTodoDto = new RequestTodoDto("title" + i, "detail" + i);
                 todoService.createTodo(x+1L,reqTodoDto);
                 for (int j = 0; j < 7; j++) {
-                    RequestCommentDto reqCommentDto = new RequestCommentDto("author" + j, "detail" + j);
+                    RequestCommentDto reqCommentDto = new RequestCommentDto("detail" + j);
                     commentService.createComment(x+1L,reqCommentDto);
                 }
             }
