@@ -15,9 +15,9 @@ import java.util.List;
 public class CommentController {
     private final CommentService commentService;
     //댓글 저장
-    @PostMapping("/{id}")
-    public BaseResponseDto createComment(@PathVariable Long id, @RequestBody RequestCommentDto reqDto){
-        return commentService.createComment(id,reqDto);
+    @PostMapping("/{todoId}")
+    public BaseResponseDto createComment(@PathVariable Long todoId, @RequestBody RequestCommentDto reqDto){
+        return commentService.createComment(todoId,reqDto);
     }
 
     // 댓글 단건 조회

@@ -17,9 +17,9 @@ public class TodoController {
     private final TodoService todoService;
 
     // 일정 저장
-    @PostMapping("/{id}")
-    public BaseResponseDto createTodo(@PathVariable Long id , @RequestBody RequestTodoDto reqTodo){
-        return todoService.createTodo(id,reqTodo);
+    @PostMapping("/{memberId}")
+    public BaseResponseDto createTodo(@PathVariable Long memberId , @RequestBody RequestTodoDto reqTodo){
+        return todoService.createTodo(memberId,reqTodo);
     }
     // 일정 단건 조회
     @GetMapping("/{id}")
