@@ -40,6 +40,7 @@ public class TodoService {
         return new BaseResponseDto(BaseResponseEnum.TODO_UPDATE_SUCCESS);
     }
 
+    @Transactional
     public BaseResponseDto deleteTodo(Long id) {
         Todo todo = utilFind.todoFindById(id);
         todoRepository.delete(todo);
