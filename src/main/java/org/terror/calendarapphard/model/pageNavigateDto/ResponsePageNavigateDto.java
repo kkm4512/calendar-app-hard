@@ -12,12 +12,14 @@ import org.terror.calendarapphard.model.TimeStampDto;
 @Setter
 @Getter
 public class ResponsePageNavigateDto extends TimeStampDto {
+    private Long id;
     private String title;
     private String author;
     private String detail;
     private int commentCount;
 
     public ResponsePageNavigateDto(Todo todo) {
+        this.id = todo.getId();
         this.title = todo.getTitle();
         this.author = todo.getAuthor();
         this.detail = todo.getDetail();
