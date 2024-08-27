@@ -16,7 +16,7 @@ public class CommentController {
     private final CommentService commentService;
     //댓글 저장
     @PostMapping("/{todoId}")
-    public BaseResponseDto saveComment(@PathVariable Long todoId, @RequestBody RequestCommentDto reqDto){
+    public BaseResponseDto createComment(@PathVariable Long todoId, @RequestBody RequestCommentDto reqDto){
         return commentService.saveComment(todoId,reqDto);
     }
 
