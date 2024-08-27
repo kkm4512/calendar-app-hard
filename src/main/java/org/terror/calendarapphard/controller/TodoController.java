@@ -8,7 +8,7 @@ import org.terror.calendarapphard.model.todoDto.ResponseTodoDto;
 import org.terror.calendarapphard.service.TodoService;
 
 @RestController
-@RequestMapping("/api/calendars")
+@RequestMapping("/api/todos")
 @RequiredArgsConstructor
 public class TodoController {
     private final TodoService todoService;
@@ -28,5 +28,11 @@ public class TodoController {
     @PutMapping("/{id}")
     public BaseResponseDto updateTodo(@PathVariable Long id, @RequestBody RequestTodoDto reqDto){
         return todoService.updateTodo(id,reqDto);
+    }
+
+    // 일정 삭제
+    @DeleteMapping("/{id}")
+    public BaseResponseDto deleteTodo(@PathVariable Long id){
+        return todoService.deleteTodo(id);
     }
 }

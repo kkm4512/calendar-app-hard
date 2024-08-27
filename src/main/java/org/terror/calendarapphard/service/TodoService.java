@@ -40,4 +40,9 @@ public class TodoService {
         return new BaseResponseDto(BaseResponseEnum.TODO_UPDATE_SUCCESS);
     }
 
+    public BaseResponseDto deleteTodo(Long id) {
+        Todo todo = utilFind.todoFindById(id);
+        todoRepository.delete(todo);
+        return new BaseResponseDto(BaseResponseEnum.TODO_DELETE_SUCCESS);
+    }
 }
