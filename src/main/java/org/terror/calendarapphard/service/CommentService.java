@@ -21,7 +21,7 @@ public class CommentService {
     private final UtilFind utilFind;
 
     @Transactional
-    public BaseResponseDto saveComment(Long todoId,RequestCommentDto reqDto) {
+    public BaseResponseDto createComment(Long todoId,RequestCommentDto reqDto) {
         Todo todo = utilFind.todoFindById(todoId);
         Comment comment = new Comment(reqDto);
         comment.setTodo(todo);

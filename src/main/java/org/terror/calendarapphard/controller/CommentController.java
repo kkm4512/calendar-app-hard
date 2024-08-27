@@ -17,7 +17,7 @@ public class CommentController {
     //댓글 저장
     @PostMapping("/{todoId}")
     public BaseResponseDto createComment(@PathVariable Long todoId, @RequestBody RequestCommentDto reqDto){
-        return commentService.saveComment(todoId,reqDto);
+        return commentService.createComment(todoId,reqDto);
     }
 
     // 댓글 단건 조회
