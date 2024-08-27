@@ -29,7 +29,7 @@ public class Todo extends TimeStamp {
     private final List<Comment> commnetList = new ArrayList<>();
 
     // 일정은 이제 작성 유저명 대신 유저 고유 식별자 필드를 가짐
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

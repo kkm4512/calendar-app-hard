@@ -10,9 +10,12 @@ import org.terror.calendarapphard.enums.BaseResponseEnum;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.todoDto.RequestTodoDto;
 import org.terror.calendarapphard.model.todoDto.ResponseTodoDto;
+import org.terror.calendarapphard.model.todoDto.ResponseTodoFindAllDto;
 import org.terror.calendarapphard.repository.CalendarRepository;
 import org.terror.calendarapphard.repository.TodoRepository;
 import org.terror.calendarapphard.util.UtilFind;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +59,10 @@ public class TodoService {
         Todo todo = utilFind.todoFindById(id);
         todoRepository.delete(todo);
         return new BaseResponseDto(BaseResponseEnum.TODO_DELETE_SUCCESS);
+    }
+
+    public List<ResponseTodoFindAllDto> getAllTodo() {
+        List<Todo> todoList = todoRepository.findAll();
+        return todoList.stream().map(ResponseTodoFindAllDto::new).toList();
     }
 }
