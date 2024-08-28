@@ -10,6 +10,7 @@ import org.terror.calendarapphard.security.JwtFailHandlerFilter;
 
 @RequiredArgsConstructor
 @Component
+// Filter 단에서 생기는 exception 직접 커스텀하여 핸들링하기 위해 생성
 public class WebSecurityConfig {
     private final ObjectMapper objectMapper;
     @Bean
