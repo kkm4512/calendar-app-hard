@@ -1,17 +1,19 @@
 package org.terror.calendarapphard.service;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terror.calendarapphard.entity.Calendar;
 import org.terror.calendarapphard.entity.Member;
-import org.terror.calendarapphard.entity.Todo;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
+import org.terror.calendarapphard.exceptions.HandleNotFoundException;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.JwtDto;
 import org.terror.calendarapphard.model.memberDto.RequestMemberDto;
 import org.terror.calendarapphard.model.memberDto.ResponseMemberDto;
+import org.terror.calendarapphard.model.memberDto.SignInDto;
 import org.terror.calendarapphard.repository.MemberRepository;
 import org.terror.calendarapphard.util.JwtManager;
 import org.terror.calendarapphard.util.UtilFind;
@@ -27,7 +29,7 @@ public class MemberService {
     private final JwtManager jm;
 
     @Transactional
-    public String createMember(RequestMemberDto reqDto) {
+    public String signUp(RequestMemberDto reqDto) {
         Member member = new Member(reqDto);
         String hashedPassword = passwordEncoder.encode(reqDto.getPassword());
         member.setPassword(hashedPassword);
@@ -58,11 +60,24 @@ public class MemberService {
     @Transactional
     public BaseResponseDto setWorker(Long memberId,Long todoId, Long workerId) {
         // 담당자가 있는지 확인
-        Member member = utilFind.memberFindById(workerId);
+        utilFind.memberFindById(workerId);
         // 일정이 있는지 확인
-        Todo todo = utilFind.todoFindById(todoId);
+        utilFind.todoFindById(todoId);
         Calendar calendar = utilFind.calendarFindByMemberId_TodoId(memberId,todoId);
         calendar.setWorkerId(workerId);
         return new BaseResponseDto(BaseResponseEnum.WORKER_SET_SUCCESS);
+    }
+
+    @Transactional(readOnly = true)
+    public BaseResponseDto signIn(SignInDto user, HttpServletResponse res) {
+        Member member = memberRepository.findByEmail(user.getEmail()).orElseThrow( () -> new HandleNotFoundException(BaseResponseEnum.MEMBER_NOT_FOUND));
+        boolean isMatched = passwordEncoder.matches(user.getPassword(), member.getPassword());
+        if (isMatched) {
+            String jwt = jm.createJwt(new JwtDto(member));
+            jm.addJwtToHeader(jwt,res);
+            return new BaseResponseDto(BaseResponseEnum.MEMBER_LOGIN_SUCCESS);
+        } else {
+            return new BaseResponseDto(BaseResponseEnum.MEMBER_INVALID_CREDENTIALS);
+        }
     }
 }

@@ -15,3 +15,8 @@ public class GlobalHandlerException {
         return ResponseEntity.status(status.getStatus()).body(new BaseResponseDto(status));
     }
 }
+
+
+
+
+

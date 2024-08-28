@@ -4,10 +4,10 @@ import lombok.Getter;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
 
 @Getter
-// 무언가 찾는게 없을때
-public class HandleNotFoundException extends RuntimeException {
+// 인코딩 형식이 지원하지 않을때
+public class HandleUnSupportEncoding extends RuntimeException {
     BaseResponseEnum baseResponseEnum;
-    public HandleNotFoundException(BaseResponseEnum baseResponseEnum) {
+    public HandleUnSupportEncoding(BaseResponseEnum baseResponseEnum) {
         super(baseResponseEnum.getMessage());
         this.baseResponseEnum = baseResponseEnum;
     }

@@ -1,10 +1,14 @@
 package org.terror.calendarapphard.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.terror.calendarapphard.entity.Member;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.memberDto.RequestMemberDto;
 import org.terror.calendarapphard.model.memberDto.ResponseMemberDto;
+import org.terror.calendarapphard.model.memberDto.SignInDto;
 import org.terror.calendarapphard.service.MemberService;
 
 import java.util.List;
@@ -15,10 +19,16 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-    // 유저 저장
-    @PostMapping
-    public String createMember(@RequestBody RequestMemberDto reqDto){
-        return memberService.createMember(reqDto);
+    // 유저 회원가입
+    @PostMapping("/signUp")
+    public String signUp(@RequestBody RequestMemberDto reqDto){
+        return memberService.signUp(reqDto);
+    }
+
+    // 유저 로그인
+    @PostMapping("/signIn")
+    public BaseResponseDto signIn(@RequestBody SignInDto user, HttpServletResponse res){
+        return memberService.signIn(user,res);
     }
 
     // 유저 단건 조회

@@ -4,10 +4,9 @@ import lombok.Getter;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
 
 @Getter
-// 무언가 찾는게 없을때
-public class HandleNotFoundException extends RuntimeException {
+public class HandleUnVerifiedJwt extends RuntimeException {
     BaseResponseEnum baseResponseEnum;
-    public HandleNotFoundException(BaseResponseEnum baseResponseEnum) {
+    public HandleUnVerifiedJwt(BaseResponseEnum baseResponseEnum) {
         super(baseResponseEnum.getMessage());
         this.baseResponseEnum = baseResponseEnum;
     }
