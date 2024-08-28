@@ -1,33 +1,39 @@
-create table user
-(
+create table member (
     id bigint not null auto_increment,
     created_at datetime(6),
     updated_at datetime(6),
-    name varchar(255) not null,
-    email varchar(255) not null,
+    author varchar(255),
+    email varchar(255),
+    password varchar(255),
     primary key (id)
 )
 
-create table todo
-(
+create table todo (
     id bigint not null auto_increment,
     created_at datetime(6),
     updated_at datetime(6),
-    title varchar(255) not null,
-    author varchar(255) not null,
-    detail varchar(255) not null,
-    primary key (id),
-    foreign key (user_id) references user(id)
+    detail varchar(255),
+    title varchar(255),
+    member_id bigint,
+    primary key (id)
 )
 
-create table comment
-(
+create table comment (
     id bigint not null auto_increment,
     created_at datetime(6),
     updated_at datetime(6),
-    author varchar(255) not null,
-    detail varchar(255) not null,
-    primary key (id),
-    foreign key (todo_id) references todo(id)
+    detail varchar(255),
+    todo_id bigint,
+    primary key (id)
+)
+
+create table calendar (
+    id bigint not null auto_increment,
+    created_at datetime(6),
+    updated_at datetime(6),
+    worker_id bigint,
+    member_id bigint,
+    todo_id bigint,
+    primary key (id)
 )
 
