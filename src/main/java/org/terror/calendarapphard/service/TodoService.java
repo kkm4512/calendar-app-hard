@@ -90,6 +90,7 @@ public class TodoService {
         return new BaseResponseDto(BaseResponseEnum.TODO_DELETE_SUCCESS);
     }
 
+    @Transactional(readOnly = true)
     public List<ResponseTodoFindAllDto> getAllTodo() {
         List<Todo> todoList = todoRepository.findAll();
         return todoList.stream().map(ResponseTodoFindAllDto::new).toList();
