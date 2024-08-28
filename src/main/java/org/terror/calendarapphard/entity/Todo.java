@@ -23,15 +23,15 @@ public class Todo extends TimeStamp {
     private String title;
     private String detail;
 
-    // 댓글 갯수 알려면 양방향 해야함
-    // One 관계인 부모가 삭제되면 자식 관계인 Comment 도 삭제됨
-    @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
-    private final List<Comment> commnetList = new ArrayList<>();
-
     // 일정은 이제 작성 유저명 대신 유저 고유 식별자 필드를 가짐
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    // 댓글 갯수 알려면 양방향 해야함
+    // One 관계인 부모가 삭제되면 자식 관계인 Comment 도 삭제됨
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
+    private final List<Comment> commnetList = new ArrayList<>();
 
     // Todo 가 삭제되면 캘린더도 삭제되게 하기위해 설정
     @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
