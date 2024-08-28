@@ -45,11 +45,21 @@ public class MemberService {
         // User 라면
         else member.setRole(UserRole.USER.getRole());
         memberRepository.save(member);
-        System.out.println(member.getId());
-        System.out.println(member.getEmail());
-        System.out.println(member.getAuthor());
         return jm.createJwt(new JwtDto(member));
+    }
 
+
+    @Transactional(readOnly = true)
+    public BaseResponseDto signIn(SignInDto user, HttpServletResponse res) {
+        Member member = memberRepository.findByEmail(user.getEmail()).orElseThrow( () -> new HandleNotFoundException(BaseResponseEnum.MEMBER_NOT_FOUND));
+        boolean isMatched = passwordEncoder.matches(user.getPassword(), member.getPassword());
+        if (isMatched) {
+            String jwt = jm.createJwt(new JwtDto(member));
+            jm.addJwtToHeader(jwt,res);
+            return new BaseResponseDto(BaseResponseEnum.MEMBER_LOGIN_SUCCESS);
+        } else {
+            return new BaseResponseDto(BaseResponseEnum.MEMBER_INVALID_CREDENTIALS);
+        }
     }
 
     @Transactional(readOnly = true)
@@ -82,16 +92,4 @@ public class MemberService {
         return new BaseResponseDto(BaseResponseEnum.WORKER_SET_SUCCESS);
     }
 
-    @Transactional(readOnly = true)
-    public BaseResponseDto signIn(SignInDto user, HttpServletResponse res) {
-        Member member = memberRepository.findByEmail(user.getEmail()).orElseThrow( () -> new HandleNotFoundException(BaseResponseEnum.MEMBER_NOT_FOUND));
-        boolean isMatched = passwordEncoder.matches(user.getPassword(), member.getPassword());
-        if (isMatched) {
-            String jwt = jm.createJwt(new JwtDto(member));
-            jm.addJwtToHeader(jwt,res);
-            return new BaseResponseDto(BaseResponseEnum.MEMBER_LOGIN_SUCCESS);
-        } else {
-            return new BaseResponseDto(BaseResponseEnum.MEMBER_INVALID_CREDENTIALS);
-        }
-    }
 }
