@@ -19,7 +19,6 @@ public class UtilFind {
     private final MemberRepository memberRepository;
     private final TodoRepository todoRepository;
     private final CommentRepository commentRepository;
-    private final CalendarRepository CalendarRepository;
     private final CalendarRepository calendarRepository;
 
     /**

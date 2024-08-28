@@ -1,10 +1,8 @@
 package org.terror.calendarapphard.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.terror.calendarapphard.entity.Member;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.memberDto.RequestMemberDto;
 import org.terror.calendarapphard.model.memberDto.ResponseMemberDto;

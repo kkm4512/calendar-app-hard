@@ -1,7 +1,6 @@
 package org.terror.calendarapphard.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.terror.calendarapphard.model.BaseResponseDto;
@@ -30,8 +29,6 @@ public class TodoController {
     }
 
     // 일정 전체 조회
-    // 여기서 RequestParam 으로 받아서
-    // 요청에따라 담당 유저 정보를 보여줄지, 안보여줄지 하게하자
     @GetMapping
     public List<ResponseTodoFindAllDto> getAllTodo(){
         return todoService.getAllTodo();

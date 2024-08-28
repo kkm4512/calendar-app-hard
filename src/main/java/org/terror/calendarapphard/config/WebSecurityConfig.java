@@ -19,7 +19,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<WebContextFailHandlerFilter> AuthFailHandlerFilter() {
+    public FilterRegistrationBean<WebContextFailHandlerFilter> webContextFailHandlerFilter() {
         FilterRegistrationBean<WebContextFailHandlerFilter> authFailHandlerFilterBean = new FilterRegistrationBean<>();
         authFailHandlerFilterBean.setFilter(new WebContextFailHandlerFilter(objectMapper));
         authFailHandlerFilterBean.setOrder(1);
