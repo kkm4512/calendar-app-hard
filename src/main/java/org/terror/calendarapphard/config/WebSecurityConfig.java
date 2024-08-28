@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.terror.calendarapphard.security.JwtFailHandlerFilter;
+import org.terror.calendarapphard.security.WebContextFailHandlerFilter;
 
 @RequiredArgsConstructor
 @Component
@@ -19,9 +19,9 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<JwtFailHandlerFilter> AuthFailHandlerFilter() {
-        FilterRegistrationBean<JwtFailHandlerFilter> authFailHandlerFilterBean = new FilterRegistrationBean<>();
-        authFailHandlerFilterBean.setFilter(new JwtFailHandlerFilter(objectMapper));
+    public FilterRegistrationBean<WebContextFailHandlerFilter> AuthFailHandlerFilter() {
+        FilterRegistrationBean<WebContextFailHandlerFilter> authFailHandlerFilterBean = new FilterRegistrationBean<>();
+        authFailHandlerFilterBean.setFilter(new WebContextFailHandlerFilter(objectMapper));
         authFailHandlerFilterBean.setOrder(1);
         return authFailHandlerFilterBean;
     }

@@ -20,6 +20,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UtilFind utilFind;
 
+
     @Transactional
     public BaseResponseDto createComment(Long todoId,RequestCommentDto reqDto) {
         Todo todo = utilFind.todoFindById(todoId);
@@ -29,11 +30,13 @@ public class CommentService {
         return new BaseResponseDto(BaseResponseEnum.COMMENT_SAVE_SUCCESS);
     }
 
+
     @Transactional(readOnly = true)
     public ResponseCommentDto getComment(Long id) {
         Comment comment = utilFind.commentFindById(id);
         return new ResponseCommentDto(comment);
     }
+
 
     @Transactional(readOnly = true)
     public List<ResponseCommentDto> getAllComments(Long todoId) {
@@ -42,6 +45,7 @@ public class CommentService {
         List<Comment> commentList = commentRepository.findByTodoId(todoId);
         return commentList.stream().map(ResponseCommentDto::new).toList();
     }
+
 
     @Transactional
     public BaseResponseDto updateComment(Long id, RequestCommentDto reqDto) {

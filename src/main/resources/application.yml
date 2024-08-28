@@ -16,3 +16,5 @@ spring:
         format_sql: true
 jwt:
   secret-key: "ZGFzZG9pb2FzMTI5MjFkamtzYWprZHNhOWFzZHNhZGlvc2FpbzkwMTIyMTA5MDEyMjE="
+authority:
+  admin-key: "7J206rKD7J2A6rSA66as7J6Q66eM65Ok7Ja07Jis7IiY7J6I64uo66eQ7J207JesISEh"

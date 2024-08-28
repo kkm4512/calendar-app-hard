@@ -53,8 +53,9 @@ public class JwtManager {
         Date date = new Date();
         String jwt = BEARER +
                 Jwts.builder()
-                        .claim("author", jwtDto.getAuthor())
-                        .claim("email", jwtDto.getEmail())
+                        .claim("author", jwtDto.getAuthor()) // 이름 설정
+                        .claim("email", jwtDto.getEmail()) // 이메일 설정
+                        .claim(AUTHORIZATION_KEY,jwtDto.getRole()) // 권한 설정
                         .setSubject(String.valueOf(jwtDto.getId())) //사용자 식별값 (ID)
                         .setExpiration(new Date(date.getTime() + EXPIRES_TOKEN)) // 만료 시간
                         .setIssuedAt(date) // 발급일

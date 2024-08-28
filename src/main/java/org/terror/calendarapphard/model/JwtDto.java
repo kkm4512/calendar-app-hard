@@ -10,10 +10,12 @@ public class JwtDto {
     private Long id;
     private String author;
     private String email;
+    private String role;
 
     public JwtDto(Member member) {
         this.id = member.getId();
         this.author = member.getAuthor();
         this.email = member.getEmail();
+        this.role = member.getRole();
     }
 }

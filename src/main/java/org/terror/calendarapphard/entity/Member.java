@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.terror.calendarapphard.enums.UserRole;
 import org.terror.calendarapphard.model.memberDto.RequestMemberDto;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Member extends TimeStamp {
     private String author;
     private String email;
     private String password;
+    private String role;
 
     // ERD 설계를 위한 코드 추가
     @OneToMany

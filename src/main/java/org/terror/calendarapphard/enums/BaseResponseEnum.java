@@ -41,6 +41,9 @@ public enum BaseResponseEnum {
     JWT_UNSUPPORTED(false,HttpStatus.UNAUTHORIZED.value(), "지원되지 않는 Jwt 입니다"),
     JWT_SIGNATURE_FAIL(false,HttpStatus.UNAUTHORIZED.value(), "시그니처 검증에 실패한 Jwt 입니다"),
 
+    // Auth
+    NOT_ADMIN(false,HttpStatus.FORBIDDEN.value(), "관리자만 접속 가능 합니다"),
+
     // Encode
     UNSUPPORTED_ENCODING(false,HttpStatus.BAD_REQUEST.value(), "클라이언트로 부터 들어온 형식은, 인코딩 할 수 없는 형식 입니다");
 

@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.terror.calendarapphard.exceptions.HandleAuthorityException;
 import org.terror.calendarapphard.exceptions.HandleNotFoundException;
 import org.terror.calendarapphard.exceptions.HandleUnVerifiedJwt;
 import org.terror.calendarapphard.model.BaseResponseDto;
@@ -14,11 +15,11 @@ import java.io.IOException;
 
 // AuthorizationFilter 에서 exception 처리 하여도 계속 500  에러만 나와
 // Web Context 단에서 발생 하는 예외를 캐치하고 내보냄
-public class JwtFailHandlerFilter extends OncePerRequestFilter {
+public class WebContextFailHandlerFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
 
-    public JwtFailHandlerFilter(ObjectMapper objectMapper) {
+    public WebContextFailHandlerFilter(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
@@ -27,6 +28,10 @@ public class JwtFailHandlerFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             filterChain.doFilter(request, response);
+        } catch (HandleAuthorityException e) {
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter()
+                    .write(objectMapper.writeValueAsString(new BaseResponseDto(e.getBaseResponseEnum())));
         // Jwt 유효 하지 않을때 ( 시그니처 검증 실패, 올바른 형식 아님 등등 )
         } catch (HandleUnVerifiedJwt e) {
             response.setContentType("application/json;charset=UTF-8");

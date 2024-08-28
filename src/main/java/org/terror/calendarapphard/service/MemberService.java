@@ -2,12 +2,16 @@ package org.terror.calendarapphard.service;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.terror.calendarapphard.entity.Calendar;
 import org.terror.calendarapphard.entity.Member;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
+import org.terror.calendarapphard.enums.UserRole;
 import org.terror.calendarapphard.exceptions.HandleNotFoundException;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.JwtDto;
@@ -22,20 +26,30 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
     private final MemberRepository memberRepository;
     private final UtilFind utilFind;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtManager jm;
+    @Value("${authority.admin-key}")
+    private String adminKey;
 
     @Transactional
     public String signUp(RequestMemberDto reqDto) {
         Member member = new Member(reqDto);
         String hashedPassword = passwordEncoder.encode(reqDto.getPassword());
         member.setPassword(hashedPassword);
-        String jwt = jm.createJwt(new JwtDto(member));
+        // reqAdminKey (사용자로부터 입력이 있고) 그 키가 adminKey 와 동일하다면
+        if (StringUtils.hasText(reqDto.getReqAdminKey()) && reqDto.getReqAdminKey().equals(adminKey)) member.setRole(UserRole.ADMIN.getRole());
+        // User 라면
+        else member.setRole(UserRole.USER.getRole());
         memberRepository.save(member);
-        return jwt;
+        System.out.println(member.getId());
+        System.out.println(member.getEmail());
+        System.out.println(member.getAuthor());
+        return jm.createJwt(new JwtDto(member));
+
     }
 
     @Transactional(readOnly = true)

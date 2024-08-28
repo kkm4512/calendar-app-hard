@@ -9,4 +9,5 @@ public class RequestMemberDto {
     private String author;
     private String email;
     private String password;
+    private String reqAdminKey;
 }
