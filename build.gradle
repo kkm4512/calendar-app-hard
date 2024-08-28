@@ -44,6 +44,8 @@ dependencies {
     implementation 'org.json:json:20230227'
     // password Hashing
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.3.3'
+    // JSONObject
+    implementation group: 'org.json', name: 'json', version: '20240303'
 }
 
 tasks.named('test') {

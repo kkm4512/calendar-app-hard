@@ -22,6 +22,7 @@ public class Todo extends TimeStamp {
     private Long id;
     private String title;
     private String detail;
+    private String weather;
 
     // 일정은 이제 작성 유저명 대신 유저 고유 식별자 필드를 가짐
     @ManyToOne(fetch = FetchType.LAZY)

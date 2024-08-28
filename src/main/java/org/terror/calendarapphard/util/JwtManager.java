@@ -127,4 +127,16 @@ public class JwtManager {
             throw new HandleNotFoundException(BaseResponseEnum.JWT_NOT_FOUND);
         }
     }
+    // Jwt 값 그대로 가져오기
+    public String getJwtFromHeaderOrigin(HttpServletRequest request) {
+        log.info("헤더에서 Jwt 뽑기 시작");
+        String jwt = request.getHeader(AUTHORIZATION_HEADER);
+        // 접두어가 "Bearer " 체크 하는 로직 if문 내에서 제외, Jwt 형식이 유효하지않다면 validate 에서 exception 처리 하고 있기 때문에
+        if (StringUtils.hasText(jwt)) {
+            log.info("헤더에서 Jwt 뽑기 종료, 추출한 jwt : {} ", jwt);
+            return jwt;
+        } else {
+            throw new HandleNotFoundException(BaseResponseEnum.JWT_NOT_FOUND);
+        }
+    }
 }

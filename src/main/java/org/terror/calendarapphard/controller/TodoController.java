@@ -1,9 +1,9 @@
 package org.terror.calendarapphard.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-import org.terror.calendarapphard.enums.UserRole;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.todoDto.RequestTodoDto;
 import org.terror.calendarapphard.model.todoDto.ResponseTodoDto;
@@ -20,8 +20,8 @@ public class TodoController {
 
     // 일정 저장
     @PostMapping("/{memberId}")
-    public BaseResponseDto createTodo(@PathVariable Long memberId , @RequestBody RequestTodoDto reqTodo){
-        return todoService.createTodo(memberId,reqTodo);
+    public BaseResponseDto createTodo(@PathVariable Long memberId , @RequestBody RequestTodoDto reqTodo, HttpServletRequest req){
+        return todoService.createTodo(memberId,reqTodo, req);
     }
     // 일정 단건 조회
     @GetMapping("/{id}")
