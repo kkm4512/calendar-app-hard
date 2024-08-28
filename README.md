@@ -23,4 +23,4 @@
 
 [ ERD ]
 
-![img_2.png](img.png)
+![img.png](img.png)
