@@ -7,6 +7,7 @@ import org.terror.calendarapphard.entity.Comment;
 import org.terror.calendarapphard.entity.Member;
 import org.terror.calendarapphard.entity.Todo;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
+import org.terror.calendarapphard.exceptions.HandleDuplicateException;
 import org.terror.calendarapphard.exceptions.HandleNotFoundException;
 import org.terror.calendarapphard.repository.CalendarRepository;
 import org.terror.calendarapphard.repository.CommentRepository;
@@ -21,9 +22,15 @@ public class UtilFind {
     private final CommentRepository commentRepository;
     private final CalendarRepository calendarRepository;
 
-    /**
-     * 1. 이것도 나중에 인터페이스로 묶어보자 !
-     */
+
+    //Member Email 로 찾기 (중복 확인용)
+    public void duplicatedEmail(String email){
+        // 여기서 true 가 나오면 중복됐다는 뜻임
+        boolean isDuplicated = memberRepository.findByEmail(email).isPresent();
+        // 중복 됐다면
+        if (isDuplicated) throw new HandleDuplicateException(BaseResponseEnum.MEMBER_DUPLICATED);
+
+    }
 
     //Member 찾는 메서드
     public Member memberFindById(Long id){

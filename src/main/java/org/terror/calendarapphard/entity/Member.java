@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.terror.calendarapphard.enums.UserRole;
 import org.terror.calendarapphard.model.memberDto.RequestMemberDto;
 
 import java.util.ArrayList;
@@ -38,4 +37,5 @@ public class Member extends TimeStamp {
         this.email = reqDto.getEmail();
         this.password = reqDto.getPassword();
     }
+
 }

@@ -1,6 +1,7 @@
 package org.terror.calendarapphard.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.terror.calendarapphard.model.BaseResponseDto;
@@ -19,13 +20,13 @@ public class MemberController {
 
     // 유저 회원가입
     @PostMapping("/signUp")
-    public String signUp(@RequestBody RequestMemberDto reqDto){
+    public String signUp(@RequestBody @Valid RequestMemberDto reqDto){
         return memberService.signUp(reqDto);
     }
 
     // 유저 로그인
     @PostMapping("/signIn")
-    public BaseResponseDto signIn(@RequestBody SignInDto user, HttpServletResponse res){
+    public BaseResponseDto signIn(@RequestBody @Valid SignInDto user, HttpServletResponse res){
         return memberService.signIn(user,res);
     }
 

@@ -15,6 +15,7 @@ public enum BaseResponseEnum {
     MEMBER_LOGIN_SUCCESS(true,HttpStatus.OK.value(), "로그인에 성공 하였습니다"),
     MEMBER_NOT_FOUND(false,HttpStatus.NOT_FOUND.value(), "요청 하는 유저가 존재하지 않습니다"),
     MEMBER_INVALID_CREDENTIALS(false,HttpStatus.UNAUTHORIZED.value(),"아이디 또는 비밀번호가 틀렸습니다"),
+    MEMBER_DUPLICATED(false,HttpStatus.CONFLICT.value(), "중복된 이메일 입니다"),
 
     // Worker
     WORKER_SET_SUCCESS(true,HttpStatus.OK.value(), "담당자 배치에 성공 하였습니다"),

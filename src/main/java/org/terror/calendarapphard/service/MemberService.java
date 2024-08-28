@@ -37,6 +37,8 @@ public class MemberService {
 
     @Transactional
     public String signUp(RequestMemberDto reqDto) {
+        // 이메일 중복 여부 체크 메서드
+        utilFind.duplicatedEmail(reqDto.getEmail());
         Member member = new Member(reqDto);
         String hashedPassword = passwordEncoder.encode(reqDto.getPassword());
         member.setPassword(hashedPassword);
@@ -91,5 +93,6 @@ public class MemberService {
         calendar.setWorkerId(workerId);
         return new BaseResponseDto(BaseResponseEnum.WORKER_SET_SUCCESS);
     }
+
 
 }
