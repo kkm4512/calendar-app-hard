@@ -25,10 +25,10 @@ public class Member extends TimeStamp {
     private String role;
 
     // ERD 설계를 위한 코드 추가
-    @OneToMany
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Todo> todoList = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Calendar> calendarList = new ArrayList<>();
 
     //Dto -> Entity
