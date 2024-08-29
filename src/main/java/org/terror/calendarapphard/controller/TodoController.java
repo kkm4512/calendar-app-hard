@@ -3,6 +3,7 @@ package org.terror.calendarapphard.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.todoDto.RequestTodoDto;
@@ -20,7 +21,7 @@ public class TodoController {
 
     // 일정 저장
     @PostMapping("/{memberId}")
-    public BaseResponseDto createTodo(@PathVariable Long memberId , @RequestBody @Valid RequestTodoDto reqTodo, HttpServletRequest req){
+    public ResponseEntity<BaseResponseDto> createTodo(@PathVariable Long memberId , @RequestBody @Valid RequestTodoDto reqTodo, HttpServletRequest req){
         return todoService.createTodo(memberId,reqTodo, req);
     }
     // 일정 단건 조회
@@ -37,13 +38,13 @@ public class TodoController {
 
     // 일정 수정
     @PutMapping("/{id}")
-    public BaseResponseDto updateTodo(@PathVariable Long id, @RequestBody @Valid RequestTodoDto reqDto){
+    public ResponseEntity<BaseResponseDto> updateTodo(@PathVariable Long id, @RequestBody @Valid RequestTodoDto reqDto){
         return todoService.updateTodo(id,reqDto);
     }
 
     // 일정 삭제
     @DeleteMapping("/{id}")
-    public BaseResponseDto deleteTodo(@PathVariable Long id){
+    public ResponseEntity<BaseResponseDto> deleteTodo(@PathVariable Long id){
         return todoService.deleteTodo(id);
     }
 }

@@ -3,6 +3,7 @@ package org.terror.calendarapphard.service;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +22,7 @@ import org.terror.calendarapphard.util.JwtManager;
 import org.terror.calendarapphard.util.UtilDate;
 import org.terror.calendarapphard.util.UtilFind;
 import org.terror.calendarapphard.enums.UriEnum;
+import org.terror.calendarapphard.util.UtilResponse;
 
 import java.net.URI;
 import java.util.List;
@@ -51,7 +53,7 @@ public class TodoService {
     }
 
     @Transactional
-    public BaseResponseDto createTodo(Long memberId, RequestTodoDto reqTodo, HttpServletRequest req) {
+    public ResponseEntity<BaseResponseDto> createTodo(Long memberId, RequestTodoDto reqTodo, HttpServletRequest req) {
         String todayWeather = getWeatherApi(req);
         Member member = utilFind.memberFindById(memberId);
         Todo todo = new Todo(reqTodo);
@@ -65,7 +67,7 @@ public class TodoService {
         todoRepository.save(todo);
         calendarRepository.save(calendar);
         System.out.println(todo.getCreatedAt());
-        return new BaseResponseDto(BaseResponseEnum.TODO_SAVE_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.TODO_SAVE_SUCCESS);
     }
 
     @Transactional(readOnly = true)
@@ -75,19 +77,19 @@ public class TodoService {
     }
 
     @Transactional
-    public BaseResponseDto updateTodo(Long id, RequestTodoDto reqDto) {
+    public ResponseEntity<BaseResponseDto> updateTodo(Long id, RequestTodoDto reqDto) {
         Todo todo = utilFind.todoFindById(id);
         //트랜잭션 환경내에 있는 더티체킹으로인하여 업데이트됨
         todo.setTitle(reqDto.getTitle());
         todo.setDetail(reqDto.getDetail());
-        return new BaseResponseDto(BaseResponseEnum.TODO_UPDATE_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.TODO_UPDATE_SUCCESS);
     }
 
     @Transactional
-    public BaseResponseDto deleteTodo(Long id) {
+    public ResponseEntity<BaseResponseDto> deleteTodo(Long id) {
         Todo todo = utilFind.todoFindById(id);
         todoRepository.delete(todo);
-        return new BaseResponseDto(BaseResponseEnum.TODO_DELETE_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.TODO_DELETE_SUCCESS);
     }
 
     @Transactional(readOnly = true)

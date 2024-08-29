@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import org.terror.calendarapphard.model.memberDto.SignInDto;
 import org.terror.calendarapphard.repository.MemberRepository;
 import org.terror.calendarapphard.util.JwtManager;
 import org.terror.calendarapphard.util.UtilFind;
+import org.terror.calendarapphard.util.UtilResponse;
 
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class MemberService {
     private final JwtManager jm;
     @Value("${authority.admin-key}")
     private String adminKey;
+    private final HttpHeaders headers = new HttpHeaders();
 
     @Transactional
     public String signUp(RequestMemberDto reqDto) {
@@ -52,15 +56,15 @@ public class MemberService {
 
 
     @Transactional(readOnly = true)
-    public BaseResponseDto signIn(SignInDto user, HttpServletResponse res) {
+    public ResponseEntity<BaseResponseDto> signIn(SignInDto user, HttpServletResponse res) {
         Member member = memberRepository.findByEmail(user.getEmail()).orElseThrow( () -> new HandleNotFoundException(BaseResponseEnum.MEMBER_NOT_FOUND));
         boolean isMatched = passwordEncoder.matches(user.getPassword(), member.getPassword());
         if (isMatched) {
             String jwt = jm.createJwt(new JwtDto(member));
             jm.addJwtToHeader(jwt,res);
-            return new BaseResponseDto(BaseResponseEnum.MEMBER_LOGIN_SUCCESS);
+            return UtilResponse.getResponseEntity(BaseResponseEnum.MEMBER_LOGIN_SUCCESS);
         } else {
-            return new BaseResponseDto(BaseResponseEnum.MEMBER_INVALID_CREDENTIALS);
+            return UtilResponse.getResponseEntity(BaseResponseEnum.MEMBER_INVALID_CREDENTIALS);
         }
     }
 
@@ -77,22 +81,20 @@ public class MemberService {
     }
 
     @Transactional
-    public BaseResponseDto deleteMember(Long id) {
+    public ResponseEntity<BaseResponseDto> deleteMember(Long id) {
         Member member = utilFind.memberFindById(id);
         memberRepository.delete(member);
-        return new BaseResponseDto(BaseResponseEnum.MEMBER_DELETE_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.MEMBER_DELETE_SUCCESS);
     }
 
     @Transactional
-    public BaseResponseDto setWorker(Long memberId,Long todoId, Long workerId) {
+    public ResponseEntity<BaseResponseDto> setWorker(Long memberId,Long todoId, Long workerId) {
         // 담당자가 있는지 확인
         utilFind.memberFindById(workerId);
         // 일정이 있는지 확인
         utilFind.todoFindById(todoId);
         Calendar calendar = utilFind.calendarFindByMemberId_TodoId(memberId,todoId);
         calendar.setWorkerId(workerId);
-        return new BaseResponseDto(BaseResponseEnum.WORKER_SET_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.WORKER_SET_SUCCESS);
     }
-
-
 }

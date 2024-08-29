@@ -2,6 +2,7 @@ package org.terror.calendarapphard.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.terror.calendarapphard.model.BaseResponseDto;
 import org.terror.calendarapphard.model.commentDto.RequestCommentDto;
@@ -17,7 +18,7 @@ public class CommentController {
     private final CommentService commentService;
     //댓글 저장
     @PostMapping("/{todoId}")
-    public BaseResponseDto createComment(@PathVariable Long todoId, @RequestBody @Valid RequestCommentDto reqDto){
+    public ResponseEntity<BaseResponseDto> createComment(@PathVariable Long todoId, @RequestBody @Valid RequestCommentDto reqDto){
         return commentService.createComment(todoId,reqDto);
     }
 
@@ -37,13 +38,13 @@ public class CommentController {
 
     // 댓글 수정
     @PutMapping("/{id}")
-    public BaseResponseDto updateComment(@PathVariable Long id, @RequestBody @Valid RequestCommentDto reqDto){
+    public ResponseEntity<BaseResponseDto> updateComment(@PathVariable Long id, @RequestBody @Valid RequestCommentDto reqDto){
         return commentService.updateComment(id,reqDto);
     }
 
     // 댓글 삭제
     @DeleteMapping("/{id}")
-    public BaseResponseDto deleteComment(@PathVariable Long id){
+    public ResponseEntity<BaseResponseDto> deleteComment(@PathVariable Long id){
         return commentService.deleteComment(id);
     }
 }

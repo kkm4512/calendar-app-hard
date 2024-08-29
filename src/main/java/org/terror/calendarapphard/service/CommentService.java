@@ -1,6 +1,7 @@
 package org.terror.calendarapphard.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terror.calendarapphard.entity.Comment;
@@ -11,6 +12,7 @@ import org.terror.calendarapphard.model.commentDto.RequestCommentDto;
 import org.terror.calendarapphard.model.commentDto.ResponseCommentDto;
 import org.terror.calendarapphard.repository.CommentRepository;
 import org.terror.calendarapphard.util.UtilFind;
+import org.terror.calendarapphard.util.UtilResponse;
 
 import java.util.List;
 
@@ -22,12 +24,12 @@ public class CommentService {
 
 
     @Transactional
-    public BaseResponseDto createComment(Long todoId,RequestCommentDto reqDto) {
+    public ResponseEntity<BaseResponseDto> createComment(Long todoId, RequestCommentDto reqDto) {
         Todo todo = utilFind.todoFindById(todoId);
         Comment comment = new Comment(reqDto);
         comment.setTodo(todo);
         commentRepository.save(comment);
-        return new BaseResponseDto(BaseResponseEnum.COMMENT_SAVE_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.COMMENT_SAVE_SUCCESS);
     }
 
 
@@ -48,16 +50,16 @@ public class CommentService {
 
 
     @Transactional
-    public BaseResponseDto updateComment(Long id, RequestCommentDto reqDto) {
+    public ResponseEntity<BaseResponseDto> updateComment(Long id, RequestCommentDto reqDto) {
         Comment comment = utilFind.commentFindById(id);
         comment.setDetail(reqDto.getDetail());
-        return new BaseResponseDto(BaseResponseEnum.COMMENT_UPDATE_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.COMMENT_UPDATE_SUCCESS);
     }
 
     @Transactional
-    public BaseResponseDto deleteComment(Long id) {
+    public ResponseEntity<BaseResponseDto> deleteComment(Long id) {
         Comment comment = utilFind.commentFindById(id);
         commentRepository.delete(comment);
-        return new BaseResponseDto(BaseResponseEnum.COMMENT_DELETE_SUCCESS);
+        return UtilResponse.getResponseEntity(BaseResponseEnum.COMMENT_DELETE_SUCCESS);
     }
 }

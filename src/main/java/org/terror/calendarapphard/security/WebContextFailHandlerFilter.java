@@ -30,16 +30,19 @@ public class WebContextFailHandlerFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (HandleAuthorityException e) {
             response.setContentType("application/json;charset=UTF-8");
+            response.setStatus(e.getBaseResponseEnum().getStatus());
             response.getWriter()
                     .write(objectMapper.writeValueAsString(new BaseResponseDto(e.getBaseResponseEnum())));
         // Jwt 유효 하지 않을때 ( 시그니처 검증 실패, 올바른 형식 아님 등등 )
         } catch (HandleUnVerifiedJwt e) {
             response.setContentType("application/json;charset=UTF-8");
+            response.setStatus(e.getBaseResponseEnum().getStatus());
             response.getWriter()
                     .write(objectMapper.writeValueAsString(new BaseResponseDto(e.getBaseResponseEnum())));
         // Jwt 찾을 수 없을때
         } catch (HandleNotFoundException e) {
             response.setContentType("application/json;charset=UTF-8");
+            response.setStatus(e.getBaseResponseEnum().getStatus());
             response.getWriter()
                     .write(objectMapper.writeValueAsString(new BaseResponseDto(e.getBaseResponseEnum())));
         }
