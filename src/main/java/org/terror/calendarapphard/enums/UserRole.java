@@ -2,6 +2,9 @@ package org.terror.calendarapphard.enums;
 
 import lombok.Getter;
 
+/**
+ * 유저 권한 정의 모음
+ */
 @Getter
 public enum UserRole {
     ADMIN(Authority.ADMIN),

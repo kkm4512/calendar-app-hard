@@ -3,6 +3,9 @@ package org.terror.calendarapphard.enums;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * 성공,실패 여부에대한 응답객체 모음
+ */
 @Getter
 public enum BaseResponseEnum {
     // 공용

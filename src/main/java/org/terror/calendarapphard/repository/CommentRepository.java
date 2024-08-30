@@ -7,6 +7,9 @@ import org.terror.calendarapphard.entity.Comment;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * 댓글 DB와 상호작용하는 JPA
+ */
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     // 없을수도 있기 때문에 Optional

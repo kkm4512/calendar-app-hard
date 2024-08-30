@@ -6,6 +6,9 @@ import org.terror.calendarapphard.entity.Member;
 
 import java.util.Optional;
 
+/**
+ * 유저 DB와 상호작용하는 JPA
+ */
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);

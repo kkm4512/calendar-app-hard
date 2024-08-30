@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/api/comments")
 public class CommentController {
     private final CommentService commentService;
+
     //댓글 저장
     @PostMapping("/{todoId}")
     public ResponseEntity<BaseResponseDto> createComment(@PathVariable Long todoId, @RequestBody @Valid RequestCommentDto reqDto){
@@ -29,11 +30,9 @@ public class CommentController {
     }
 
     // 댓글 다건 조회
-    // 어떤 일정에대한 댓글 다건조회를 해야해서 todoId 받아옴
-    // 다건 조회할때 조건을 추가할수있게 Param 로 받게함
-    @GetMapping("/query")
-    public List<ResponseCommentDto> getAllComments(@RequestParam Long todoId){
-        return commentService.getAllComments(todoId);
+    @GetMapping
+    public List<ResponseCommentDto> getAllComments(){
+        return commentService.getAllComments();
     }
 
     // 댓글 수정

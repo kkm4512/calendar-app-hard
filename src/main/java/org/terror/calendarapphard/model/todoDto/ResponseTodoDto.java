@@ -1,9 +1,6 @@
 package org.terror.calendarapphard.model.todoDto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.terror.calendarapphard.entity.Comment;
 import org.terror.calendarapphard.entity.Todo;
 import org.terror.calendarapphard.model.TimeStampDto;
@@ -11,21 +8,20 @@ import org.terror.calendarapphard.model.TimeStampDto;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
+// 서버에서 처리된 일정을 클라이언트로 보내기위한 DTO 클래스
 @Getter
 public class ResponseTodoDto extends TimeStampDto {
-    private Long id;
-    private String title;
-    private String author;
-    private String detail;
-    private String email;
-    private List<Comment> commnetList = new ArrayList<>();
+    private final Long id;
+    private final String title;
+    private final String author;
+    private final String detail;
+    private final String email;
+    private final List<Comment> commnetList = new ArrayList<>();
 
 
     // Entity -> Dto
     public ResponseTodoDto(Todo todo) {
+        super(todo.getCreatedAt(),todo.getUpdatedAt());
         this.id = todo.getId();
         this.title = todo.getTitle();
         this.author = todo.getMember().getAuthor();
@@ -33,7 +29,5 @@ public class ResponseTodoDto extends TimeStampDto {
         this.detail = todo.getDetail();
         // 페이지네비게이션 에서 댓클 갯수 새주는거 때문에 넣어둠
         this.commnetList.addAll(todo.getCommnetList());
-        this.setCreatedAt(todo.getCreatedAt());
-        this.setUpdatedAt(todo.getUpdatedAt());
     }
 }

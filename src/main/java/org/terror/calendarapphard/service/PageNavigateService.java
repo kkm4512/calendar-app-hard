@@ -16,6 +16,16 @@ import org.terror.calendarapphard.repository.PageableRepository;
 public class PageNavigateService {
     private final PageableRepository pageableRepository;
 
+    /**
+     * 페이지 조회 비즈니스 로직
+     *
+     * @param page / 조회 하고자하는 페이지
+     * @param size / 페이지에 담겨야할 데이터의 갯수, 값이 들어오지않는다면 10이 기본값
+     * @return Page<ResponsePageNavigateDto> / 특정 페이지의 데이터들을 수정일 기준으로 반환
+     *
+     * 페이지 조회에 성공하면, 데이터들을 반환합니다
+     * 데이터가 없다면 빈리스트를 반환합니다
+     */
     @Transactional(readOnly = true)
     public Page<ResponsePageNavigateDto> getPage(int page, int size) {
         // 디폴트 페이지 크기는 10

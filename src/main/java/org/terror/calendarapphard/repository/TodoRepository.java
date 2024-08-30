@@ -6,6 +6,9 @@ import org.terror.calendarapphard.entity.Todo;
 
 import java.util.Optional;
 
+/**
+ * 일정 DB와 상호작용하는 JPA
+ */
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
     //memberId,todoId로 일정 찾기

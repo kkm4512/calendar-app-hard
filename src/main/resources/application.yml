@@ -1,10 +1,14 @@
+server:
+  port: ${SERVER_PORT}
 # DB config
 spring:
+  config:
+    import: optional:file:.env[.properties]
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/todohardapp?serverTimezone=Asia/Seoul
-    username: root
-    password: root
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB_NAME}?serverTimezone=Asia/Seoul
+    username: ${MYSQL_NAME}
+    password: ${MYSQL_PASSWORD}
 # 변경될때마다 update
   jpa:
     hibernate:
@@ -15,6 +19,6 @@ spring:
         show_sql: true
         format_sql: true
 jwt:
-  secret-key: "ZGFzZG9pb2FzMTI5MjFkamtzYWprZHNhOWFzZHNhZGlvc2FpbzkwMTIyMTA5MDEyMjE="
+  secret-key: ${JWT_SECRET_KEY}
 authority:
-  admin-key: "7J206rKD7J2A6rSA66as7J6Q66eM65Ok7Ja07Jis7IiY7J6I64uo66eQ7J207JesISEh"
+  admin-key: ${ADMIN_KEY}

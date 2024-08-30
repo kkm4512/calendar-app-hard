@@ -1,20 +1,20 @@
 package org.terror.calendarapphard.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.terror.calendarapphard.model.memberDto.RequestMemberDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 유저 DB와 소통하는 Entity
+ */
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
 @Entity
+@Builder
 public class Member extends TimeStamp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class Member extends TimeStamp {
     private String role;
 
     // ERD 설계를 위한 코드 추가
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Todo> todoList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Calendar> calendarList = new ArrayList<>();
 
     //Dto -> Entity

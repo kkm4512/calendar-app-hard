@@ -1,19 +1,18 @@
 package org.terror.calendarapphard.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.terror.calendarapphard.model.todoDto.RequestTodoDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 일정 DB와 소통하는 Entity
+ */
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
+@Builder
 @Getter
 @Entity
 public class Todo extends TimeStamp {
@@ -31,13 +30,12 @@ public class Todo extends TimeStamp {
 
     // 댓글 갯수 알려면 양방향 해야함
     // One 관계인 부모가 삭제되면 자식 관계인 Comment 도 삭제됨
-    @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private final List<Comment> commnetList = new ArrayList<>();
 
     // Todo 가 삭제되면 캘린더도 삭제되게 하기위해 설정
-    @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Calendar> calendarList = new ArrayList<>();
-
 
     // Dto -> Entity
     public Todo(RequestTodoDto reqTodo) {

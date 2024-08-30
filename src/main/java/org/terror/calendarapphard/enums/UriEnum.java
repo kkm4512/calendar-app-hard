@@ -2,6 +2,9 @@ package org.terror.calendarapphard.enums;
 
 import lombok.Getter;
 
+/**
+ * 자주 사용되는 URI,PATH 모음
+ */
 @Getter
 public enum UriEnum {
     WEATHER_URI("https://f-api.github.io"),

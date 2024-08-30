@@ -16,6 +16,14 @@ import org.terror.calendarapphard.util.UtilFind;
 
 import java.io.IOException;
 
+/**
+ * 클라이언트의 요청중 인증,인가 처리 담당 필터
+ *
+ * 회원가입,로그인 URL접속시 인증,인가 패스
+ * 일정 수정,삭제 URL접속시 관리자 권한인지 확인 관리자라면 다음 필터로 넘깁니다
+ * 그 외 URL로 접속했을시 전부 인증,인가 처리를 합니다
+ * @throws HandleAuthorityException / 관리자 권한이 없다면 예외를 발생시킵니다
+ */
 @Slf4j(topic = "AuthorizationFilter")
 @Component
 @Order(1)

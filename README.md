@@ -16,7 +16,7 @@
 | 일정 삭제 | DELETE | /api/todos/{id} | 요청 path | 상태코드,상태boolean값,메세지 |
 | 댓글 저장 | POST | /api/comments/{todoId} | 요청 path,body | 상태코드,상태boolean값,메세지 |
 | 댓글 단건 조회 | GET | /api/comments/{id} | 요청 path | 단건 댓글 |
-| 댓글 다건 조회 | GET | /api/comments/query | 요청 param | 다건 댓글 |
+| 댓글 다건 조회 | GET | /api/comments | 요청 | 다건 댓글 |
 | 댓글 수정 | PUT | /api/comments/{id} | 요청 path, 요청 body | 상태코드,상태boolean값,메세지 |
 | 댓글 삭제 | DELETE | /api/comments/{id} | 요청 path | 상태코드,상태boolean값,메세지 |
 | N페이지 조회 | GET | /api/query | 요청 param | 일정제목, 일정내용, 댓글개수, 일정작성일, 일정수정일, 일정작성유저명 |

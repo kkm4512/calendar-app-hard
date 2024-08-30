@@ -1,15 +1,15 @@
 package org.terror.calendarapphard.exceptions;
 
-import lombok.Getter;
 import org.terror.calendarapphard.enums.BaseResponseEnum;
 
-@Getter
-// 무언가 찾는게 없을때
-public class HandleNotFoundException extends RuntimeException {
-    BaseResponseEnum baseResponseEnum;
+/**
+ * 조회 불가 예외 클래스
+ *
+ * 조회 하고자 하는 데이터가 없을경우 예외 처리 클래스입니다
+ */
+public class HandleNotFoundException extends BaseHandleException {
     public HandleNotFoundException(BaseResponseEnum baseResponseEnum) {
-        super(baseResponseEnum.getMessage());
-        this.baseResponseEnum = baseResponseEnum;
+        super(baseResponseEnum);
     }
 }
 

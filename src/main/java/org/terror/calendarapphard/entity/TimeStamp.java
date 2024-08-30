@@ -10,6 +10,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+/**
+ * 서버에서 저장되는 생성일,수정일을 처리하기위한 DTO 클래스
+ *
+ * 해당 DTO클래스를 상속받고, 생성하거나 수정하면 자동으로 DB가 업데이트 됩니다
+ */
+
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
